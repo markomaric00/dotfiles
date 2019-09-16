@@ -55,7 +55,7 @@ filetype plugin indent on
 
 set nobackup "file automatically deleted after succesfully writing the og file
 set autoread
-set clipboard=unnamedplus
+set clipboard=unnamed
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
 " Automatically write closing brackets and ending quotes
@@ -64,6 +64,34 @@ inoremap        [  []<Left>
 inoremap        {  {}<Left>
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
+
+
+"+===================
+" o/O                   Start insert mode with [count] blank lines.
+"                       The default behavior repeats the insertion [count]
+"                       times, which is not so useful.
+function! s:NewLineInsertExpr( isUndoCount, command )
+    if ! v:count
+        return a:command
+    endif
+
+    let l:reverse = { 'o': 'O', 'O' : 'o' }
+    " First insert a temporary '$' marker at the next line (which is necessary
+    " to keep the indent from the current line), then insert <count> empty lines
+    " in between. Finally, go back to the previously inserted temporary '$' and
+    " enter insert mode by substituting this character.
+    " Note: <C-\><C-n> prevents a move back into insert mode when triggered via
+    " |i_CTRL-O|.
+    return (a:isUndoCount && v:count ? "\<C-\>\<C-n>" : '') .
+    \   a:command . "$\<Esc>m`" .
+    \   v:count . l:reverse[a:command] . "\<Esc>" .
+    \   'g``"_s'
+endfunction
+nnoremap <silent> <expr> o <SID>NewLineInsertExpr(1, 'o')
+nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
+
+
+"+====================
 
 "+=====================+"
 "|  Plugin Key Maps    |"
@@ -77,3 +105,5 @@ let g:python_highlight_all = 1
 map <F2> :NERDTreeToggle<CR>
 "map f3 to sysntasticchecker
 map <F3> :SyntasticCheck<CR>
+"map f4 to ctrlp
+map <F4> :CtrlP<CR>
