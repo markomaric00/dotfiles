@@ -41,7 +41,7 @@ opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.shiftround = true
 opt.number = true
-opt.clipboard=unnamed,unnamedplus
+opt.clipboard="unnamed,unnamedplus"
 
 --Remap space as leader key
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
