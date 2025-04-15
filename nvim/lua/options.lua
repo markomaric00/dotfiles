@@ -9,6 +9,7 @@ opt.hlsearch = false -- Set highlight on search
 opt.ignorecase = true -- Ignore case
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Print line number
+opt.relativenumber = true
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 4 -- Size of an indent
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time

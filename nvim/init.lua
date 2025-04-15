@@ -5,7 +5,5 @@ require "git-config"
 require "lualine-config"
 require "bufferline-config"
 require "telescope-config"
---require "autopairs-config"
 require "lsp-config"
---require "nvim-tree".setup()
 require "nvim-tree-config"
