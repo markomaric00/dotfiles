@@ -2,7 +2,7 @@
 
 local status_ok, fzflua = pcall(require, "fzf-lua")
 if not status_ok then
-  return
+    return
 end
 
 
@@ -13,5 +13,5 @@ vim.keymap.set('n', '<leader>gs', fzflua.git_status, { desc = '[G]it [S]tatus' }
 vim.keymap.set('n', '<leader>sf', fzflua.files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sb', fzflua.buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sn', function()
-fzflua.files({ cwd = vim.fn.stdpath 'config' })
+    fzflua.files({ cwd = vim.fn.stdpath 'config' })
 end, { desc = '[S]earch [N]eovim files' })
