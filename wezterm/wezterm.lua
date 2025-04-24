@@ -12,11 +12,6 @@ local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.
 local act = wezterm.action
 local mux = wezterm.mux
 
-wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
-end)
-
 local config = {}
 -- Use config builder object if possible
 if wezterm.config_builder then config = wezterm.config_builder() end
@@ -32,20 +27,7 @@ config.window_decorations = "RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
 config.default_workspace = "main"
-config.font_size = 10
-
--- Dim inactive panes
-config.inactive_pane_hsb = {
-  saturation = 0.24,
-  brightness = 0.5
-}
-
---resurrect.state_manager.periodic_save({
---	interval_seconds = 15 * 60,
---	save_workspaces = true,
---	save_windows = true,
---	save_tabs = true,
---})
+config.font_size = 11
 
 -- Keys
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -186,6 +168,7 @@ config.key_tables = {
 config.use_fancy_tab_bar = false
 config.status_update_interval = 1000
 config.tab_bar_at_bottom = true
+config.hide_tab_bar_if_only_one_tab = false
 wezterm.on("update-status", function(window, pane)
   -- Workspace name
   local stat = window:active_workspace()
@@ -240,18 +223,13 @@ wezterm.on("update-status", function(window, pane)
   }))
 end)
 
---[[ Appearance setting for when I need to take pretty screenshots
-config.enable_tab_bar = false
 config.window_padding = {
-  left = '0.5cell',
-  right = '0.5cell',
-  top = '0.5cell',
-  bottom = '0cell',
+  left = '0',
+  right = '0',
+  top = '0',
+  bottom = '0',
 
 }
---]]
-
-
 
 
 return config

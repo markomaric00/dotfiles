@@ -7,3 +7,4 @@ require "lualine-config"
 require "lsp-config"
 require "nvim-tree-config"
 require "fzf-lua-config"
+require("copilot-config")
