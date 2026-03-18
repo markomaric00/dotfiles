@@ -1,10 +1,13 @@
-require "keymaps"
-require "options"
-require "lazy-config"
-require "git-config"
-require "lualine-config"
---require "bufferline-config"
-require "lsp-config"
-require "nvim-tree-config"
-require "fzf-lua-config"
-require("copilot-config")
+-- ===========================================================================
+-- Core Configuration Loading
+-- This file loads all other configuration modules.
+-- It should be kept as clean and minimal as possible.
+-- ===========================================================================
+require("core.lsp")
+
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
+
+
+require("core.lazy")
